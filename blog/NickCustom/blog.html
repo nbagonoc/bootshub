@@ -1,0 +1,46 @@
+{% include "custom/system/header.html" %}
+
+<div class="blog">
+  <div class="container">
+	{% if is_listing_view %}
+		<div class="post-listing">
+		{% for content in contents %}
+			<div class="post-wrapper">
+				<h1><a href="{{ content.absolute_url }}">{{ content.name }}</a></h1>
+				<div class="byline">
+					published on {{ content.publish_date_localized }} by <span class="author">{% if content.blog_post_author %}<span class="author">{{ content.blog_post_author.full_name }}{% endif %}</span> in {% for topic in content.topic_list %} <a class="topic-name" href="{{ content_group.absolute_url }}/topic/{{ topic.name }}">{{topic.name }}</a></span>{% endfor %}
+				</div>
+				<div class="post">
+				{{ content.post_list_content|safe }}
+				</div>
+				<div class="read-more">
+					<a href="{{ content.absolute_url }}">Read the whole thing &hellip;</a>
+				</div>
+			</div><!--end-post-wrapper-->
+		{% endfor %}
+			<div class="blog-pagination">
+			{% if last_page_num %}
+				<a class="previous-posts-link" href="{{contact.blog_page_link(last_page_num)}}">Previous</a>
+			{% endif %}
+			<a class="all-posts-link" href="{{ group.absolute_url }}/all">All posts</a>
+			{% if next_page_num %}
+				<a class="next-posts-link" href="{{contact.blog_page_link(next_page_num)}}">Next</a>
+			{% endif %}
+			</div>
+		</div><!-- end post-listing -->
+		{% else %}
+		<div class="single-post">
+			<div class="post-wrapper">
+				<h1>{{ content.name }}</h1>
+				<div class="byline">published on {{ content.publish_date_localized }} by <span class="author">{% if content.blog_post_author %}<span class="author">{{ content.blog_post_author.full_name }}{% endif %}</span> in {% for topic in content.topic_list %} <a class="topic-name" href="{{ content_group.absolute_url }}/topic/{{ topic.name }}">{{topic.name }}</a></span>{% endfor %}</div>
+				<div class="post">
+					{{ content.post_body|safe }}
+				</div>
+			</div><!--end-post-wrapper-->
+			{% blog_comments "post_comments" %}
+		</div><!-- end .single-post -->
+		{% endif %} <!-- end the listing page versus post page if/else statement -->
+  </div>
+</div>
+
+{% include "custom/system/footer.html" %}
