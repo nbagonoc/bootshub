@@ -6,13 +6,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="favicon.ico">
-  <title>project</title>
-  <meta name="description" content="welcome to my website" />
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
-  <link href="css/animate.css" rel="stylesheet">
-  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:bold|Roboto" rel="stylesheet">  google font -->
+  <title>{{ content.html_title }}</title>
+  {{ standard_header_includes }}
+  <link href="{{ get_public_template_url("custom/system/bootstrap.min.css") }}" rel="stylesheet">
+  <link href="{{ get_public_template_url("custom/system/styles.css") }}" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -41,15 +39,3 @@
     
     </div>
   </nav>
-  
-  <div class="footer">
-  </div>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/viewportchecker.js"></script><!-- viewport checker for triggerAnimation.js -->
-  <script src="js/animationTrigger.js"></script><!-- controls/triggers the animation.css on scroll -->
-  <script src="js/respond.min.js"></script><!-- fix ie 6, 7 and 8 -->
-</body>
-
-</html>
