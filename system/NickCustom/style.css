@@ -1,13 +1,192 @@
 body{/*fix fixed-top issude*/
 	padding-top: 50px;
+	background: #F7F7F7;
 }
 
+/*font*/
+p{
+	color: #333;
+}
+.text-muted{
+	color: #999 !important;
+}
 
-.container-fluid{/*fix for padding left and right, for fluid container not being 100%*/
+/*headings*/
+h1,h2,h3,h4{
+	margin: 0 0 10px 0 !important;
+}
+
+/*links*/
+a{
+	color: #2383A0;
+}
+a:hover{
+	text-decoration: none;
+	color: #50C8F1;
+}
+
+/*image*/
+img{
+	width: 100%;
+	margin: 0 auto;
+}
+
+/*fix for padding left and right, for fluid container not being 100%*/
+.container-fluid{
 	padding: 0 !important;
 }
 
-/*MEDIA QUERIES*/
+
+/*BLOG---------------------------------*/
+.blog{
+/*container for content area and sidebar*/
+}
+
+.blog .blogContent{
+/*blog content area*/
+	background: #FFF;
+	margin-top: 25px;
+	border-radius: 5px;
+}
+.blog .blogContent .blogList{
+/*blog list container*/
+	margin: 0 25px;
+}
+.blog .blogContent .blogList .blogListPost{
+/*blog per list container*/
+	border-bottom: 1px solid #DDD;
+	padding: 25px 0;
+}
+.blog .blogContent .blogList .blogListPost .featuredImage{
+	width: 100%;
+	height: 200px;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-ms-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	border: 1px solid #DDD;
+}
+.blog .blogContent .blogPost{
+/*blog post container*/
+	margin: 0 25px;
+	padding: 25px 0;
+}
+.blog .blogContent .blogPost h1{
+	color: #2383A0 !important;
+}
+
+.blog .blogSidebar{
+/*blog sidebar area*/
+	background: #FFF;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	border-radius: 5px;
+}
+.blog .blogSidebar .module{
+	border-bottom: 1px solid #DDD;
+	padding: 25px 0;
+	margin: 0 25px;
+}
+.blog .blogSidebar .module:last-child{
+	border-bottom: 0 !important;
+}
+/*popular post*/
+.blog .blogSidebar .popularPost ul li{
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+.blog .blogSidebar .popularPost ul li:last-child{
+	border-bottom: 0 !important;
+}
+.blog .blogSidebar .popularPost ul li a{
+	display: block;
+	text-decoration: none;
+}
+/*.blog .blogSidebar .popularPost ul li a:hover{
+	text-decoration: none;
+}*/
+/*latest post*/
+.blog .blogSidebar .latestPost ul li{
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+.blog .blogSidebar .latestPost ul li:last-child{
+	border-bottom: 0 !important;
+}
+.blog .blogSidebar .latestPost ul li a{
+	display: block;
+	text-decoration: none;
+}
+/*.blog .blogSidebar .latestPost ul li a:hover{
+	text-decoration: none;
+}*/
+/*topics*/
+.blog .blogSidebar .topics ul li{
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+.blog .blogSidebar .topics ul li:last-child{
+	border-bottom: 0 !important;
+}
+.blog .blogSidebar .topics ul li a{
+	display: block;
+	text-decoration: none;
+}
+/*.blog .blogSidebar .topics ul li a:hover{
+	text-decoration: none;
+}*/
+
+/*blog comment*/
+.blog .blogContent .new-comments .field{
+	margin-bottom: 15px;
+}
+.blog .blogContent .new-comments #firstname-199aa2d3-8044-4149-b478-19d00350334c{
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 6px 12px;
+}
+#hsForm_199aa2d3-8044-4149-b478-19d00350334c > div.hs_firstname.field.hs-form-field > ul > li > label{
+	color: #FF7676;
+}
+.blog .blogContent .new-comments #lastname-199aa2d3-8044-4149-b478-19d00350334c{
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 6px 12px;
+}
+.blog .blogContent .new-comments #email-199aa2d3-8044-4149-b478-19d00350334c{
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 6px 12px;
+}
+#hsForm_199aa2d3-8044-4149-b478-19d00350334c > div.hs_email.field.hs-form-field > ul > li > label{
+	color: #FF7676;
+}
+.blog .blogContent .new-comments #website-199aa2d3-8044-4149-b478-19d00350334c{
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 6px 12px;
+}
+.blog .blogContent .new-comments #comment-199aa2d3-8044-4149-b478-19d00350334c{
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 6px 12px;
+}
+#hsForm_199aa2d3-8044-4149-b478-19d00350334c > div.hs_comment.field.hs-form-field > ul > li > label{
+	color: #FF7676;
+}
+.blog .blogContent .new-comments ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/*MEDIA QUERIES---------------------------------*/
 
 /*extra small*/
 @media(max-width:767px){

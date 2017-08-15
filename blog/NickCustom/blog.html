@@ -2,45 +2,102 @@
 
 <div class="blog">
   <div class="container">
-	{% if is_listing_view %}
-		<div class="post-listing">
-		{% for content in contents %}
-			<div class="post-wrapper">
-				<h1><a href="{{ content.absolute_url }}">{{ content.name }}</a></h1>
-				<div class="byline">
-					published on {{ content.publish_date_localized }} by <span class="author">{% if content.blog_post_author %}<span class="author">{{ content.blog_post_author.full_name }}{% endif %}</span> in {% for topic in content.topic_list %} <a class="topic-name" href="{{ content_group.absolute_url }}/topic/{{ topic.name }}">{{topic.name }}</a></span>{% endfor %}
-				</div>
-				<div class="post">
-				{{ content.post_list_content|safe }}
-				</div>
-				<div class="read-more">
-					<a href="{{ content.absolute_url }}">Read the whole thing &hellip;</a>
-				</div>
-			</div><!--end-post-wrapper-->
-		{% endfor %}
-			<div class="blog-pagination">
-			{% if last_page_num %}
-				<a class="previous-posts-link" href="{{contact.blog_page_link(last_page_num)}}">Previous</a>
-			{% endif %}
-			<a class="all-posts-link" href="{{ group.absolute_url }}/all">All posts</a>
-			{% if next_page_num %}
-				<a class="next-posts-link" href="{{contact.blog_page_link(next_page_num)}}">Next</a>
-			{% endif %}
-			</div>
-		</div><!-- end post-listing -->
-		{% else %}
-		<div class="single-post">
-			<div class="post-wrapper">
-				<h1>{{ content.name }}</h1>
-				<div class="byline">published on {{ content.publish_date_localized }} by <span class="author">{% if content.blog_post_author %}<span class="author">{{ content.blog_post_author.full_name }}{% endif %}</span> in {% for topic in content.topic_list %} <a class="topic-name" href="{{ content_group.absolute_url }}/topic/{{ topic.name }}">{{topic.name }}</a></span>{% endfor %}</div>
-				<div class="post">
-					{{ content.post_body|safe }}
-				</div>
-			</div><!--end-post-wrapper-->
-			{% blog_comments "post_comments" %}
-		</div><!-- end .single-post -->
-		{% endif %} <!-- end the listing page versus post page if/else statement -->
+  	<div class="row">
+  		<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+			<div class="blogContent"><!-- blog list & blog post -->
+				{% if is_listing_view %}
+					<div class="blogList"><!-- blog list view-->
+					{% for content in contents %}
+						<div class="blogListPost">
+							<div class="row">
+								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+									<div class="featuredImage" style="background-image: url('{{ content.post_list_summary_featured_image }}')">
+									</div>
+								</div>
+								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+									<strong><h2><a href="{{ content.absolute_url }}">{{ content.name }}</a></h2></strong><!-- title -->
+			                        {%if content.blog_post_author %}
+			                            <p class="text-muted">Posted on {##}<!-- date -->
+			                                {{ content.publish_date_local_time.strftime('%B') }}
+			                                {{ content.publish_date_local_time.strftime('%d') }},
+			                                {{ content.publish_date_local_time.strftime('%Y') }}<!-- end date -->
+			                            {##} by <a href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}" class="textMuted">
+			                            {{ content.blog_post_author.display_name }}</a> in<!-- author -->
+			                            {% if content.topic_list %}
+			                                {% for topic in content.topic_list %}
+			                                    <a class="topic-link" href="{{ group.absolute_url }}/topic/{{ topic.slug }}" class="textMuted">{{ topic.name }}</a><!-- topic -->
+			                                    {% if not loop.last %}, {% endif %}
+			                                {% endfor %}
+			                            {% endif %}
+			                            </p>
+			                        {% endif %}
+			                        {{ content.post_list_content|truncatehtml(180, '...' , false) }} <!-- content -->
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+						<div class="blogPagination">
+							<ul class="pagination">
+							{% if last_page_num %}
+								<li class="page-item"><a class="page-link" href="{{contact.blog_page_link(last_page_num)}}">Previous</a>
+							{% endif %}
+							{% if next_page_num %}
+								<li class="page-item"><a class="page-link" href="{{contact.blog_page_link(next_page_num)}}">Next</a>
+							{% endif %}
+							</ul>
+						</div>
+					</div><!-- end blog list view-->
+					{% else %}
+					<div class="blogPost"><!-- blog post view-->
+						<strong><h1>{{ content.name }}</h1></strong>
+						<p class="text-muted">Published on {{ content.publish_date_localized }} by <span class="author">{% if content.blog_post_author %}<span class="author">{{ content.blog_post_author.full_name }}{% endif %}</span> in {% for topic in content.topic_list %} <a class="topic-name" href="{{ content_group.absolute_url }}/topic/{{ topic.name }}">{{topic.name }}</a></span>{% endfor %}</p>
+            			{{ content.post_body }}
+						{% blog_comments "post_comments" %}
+					</div><!-- blog post view-->
+					{% endif %} <!-- end the listing page versus post page if/else statement -->
+			</div><!-- end blogContent -->
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+			<div class="blogSidebar"><!-- blog sidebar -->
+				<div class="module search"><!-- search -->
+					<strong><h3>Search anything</h3></strong>
+					<input class="form-control" placeholder="search..."/>
+				</div><!-- end search -->
+				<div class="module subscribe"><!-- subscribe -->
+					<strong><h3>Subscribe to us</h3></strong>
+					<input class="form-control" placeholder="your email..."/>
+				</div><!-- end subscribe -->
+				<div class="module popularPost"><!-- popular post -->
+					<strong><h3>Popular post</h3></strong>
+					<ul class="list-unstyled">
+					{% set popular_posts = blog_popular_posts('default', 5) %}
+					{% for popular_post in popular_posts %}
+		        	    <li><a href="{{popular_post.absolute_url}}">{{ popular_post.name }}</a></li>
+					{% endfor %}
+					</ul>
+				</div><!-- end popular post -->
+				<div class="module latestPost"><!-- latest post -->
+					<strong><h3>Latest post</h3></strong>
+					<ul class="list-unstyled">
+    					{% set latest_posts = blog_recent_posts('default', 10) %}
+    					{% for latest_post in latest_posts %}
+    		        	    <li><a href="{{latest_post.absolute_url}}">{{ latest_post.name }}</a></li>
+    					{% endfor %}
+					</ul>
+				</div><!-- end latest post -->
+				<div class="module topics"><!-- topics -->
+					<strong><h3>Topics</h3></strong>
+					<ul class="list-unstyled">
+                    	{% set topics = blog_topics('default', 250) %}
+                		{% for topic in topics %}
+                			<li><a href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic }}</a></li>
+                		{% endfor %}
+					</ul>
+				</div><!-- end topics -->
+			</div><!-- end sidebar -->
+		</div>
+	</div>
   </div>
-</div>
+</div><!-- end blog -->
 
 {% include "custom/system/NickCustom/aFooter.html" %}
