@@ -1,19 +1,31 @@
 body{/*fix fixed-top issude*/
-	padding-top: 50px;
-	background: #F7F7F7;
+	padding-top: 85px;
+	background: #EFEFEF;
 }
 
 /*font*/
 p{
-	color: #333;
+	color: #333 !important;
 }
 .text-muted{
 	color: #999 !important;
 }
 
+/*colors*/
+.color-dark{
+	color: #2383A0;
+}
+.color-blue{
+	color: #50C8F1;
+}
+.color-light{
+	color: #F7F7F7;
+}
+
 /*headings*/
 h1,h2,h3,h4{
 	margin: 0 0 10px 0 !important;
+	color: #2383A0;
 }
 
 /*links*/
@@ -36,6 +48,91 @@ img{
 	padding: 0 !important;
 }
 
+/*HEADER---------------------------------*/
+.navbar {
+	/*padding: 17.5px 0 !important;*/
+}
+/*logo*/
+.navbar-brand {
+	font-size: 41px !important;
+	margin-top: 17.5px;
+}
+
+/*MENU---------------------------------*/
+.navbar-header button{
+	margin: 25.5px !important;
+}
+#navbar ul li{
+	/*padding-left: 16px;*/
+	/*padding-right: 16px;*/
+	padding: 17.5px;
+}
+#navbar ul li:last-child{
+	/*padding-left: 17.5px;*/
+	padding-right: 0 !important;
+}
+#navbar ul li a{
+	background: none !important;
+	color: #F7F7F7 !important;
+}
+#navbar ul li a:hover{
+	background: none !important;
+	color: #50C8F1 !important;
+}
+#navbar ul li a:active{
+	background: none !important;
+	color: #50C8F1 !important;
+}
+#navbar > ul > li.active > a{
+	color: #50C8F1 !important;
+}
+.dropdown-menu{
+	top: 85px !important;
+	background: #222;
+}
+.dropdown-menu li{
+	padding: 6px 0 !important;
+}
+
+/*remove the max height of the mobile menus*/
+.navbar-collapse{
+	max-height: none !important;
+}
+/*removes the BOTTOM white border*/
+#navbar{
+	border-top: none;
+}
+
+/*BANNER---------------------------------*/
+.banner{
+	width: 100%;
+	margin: 0 auto;
+	padding: 100px 0;
+	background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.3)0%, rgba(0,0,0,0.3)100%), url("https://cdn2.hubspot.net/hubfs/2592581/Sixth%20Gear%20Studios%20May%202017%20/Images/Blog%20Banner.jpg?t=1501665106856") center center;
+	background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.3)0%, rgba(0,0,0,0.3)100%), url("https://cdn2.hubspot.net/hubfs/2592581/Sixth%20Gear%20Studios%20May%202017%20/Images/Blog%20Banner.jpg?t=1501665106856") center center;
+	background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.3)0%, rgba(0,0,0,0.3)100%), url("https://cdn2.hubspot.net/hubfs/2592581/Sixth%20Gear%20Studios%20May%202017%20/Images/Blog%20Banner.jpg?t=1501665106856") center center;
+	background: -o-linear-gradient(to bottom, rgba(0,0,0,0.3)0%, rgba(0,0,0,0.3)100%), url("https://cdn2.hubspot.net/hubfs/2592581/Sixth%20Gear%20Studios%20May%202017%20/Images/Blog%20Banner.jpg?t=1501665106856") center center;
+	background: linear-gradient(to bottom, rgba(0,0,0,0.3)0%, rgba(0,0,0,0.3)100%), url("https://cdn2.hubspot.net/hubfs/2592581/Sixth%20Gear%20Studios%20May%202017%20/Images/Blog%20Banner.jpg?t=1501665106856") center center;	
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-ms-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.banner h1{
+	font-size: 48px;
+	font-weight: bold;
+	margin: 0 !important;
+}
+.banner h2{
+	font-size: 65px;
+	font-weight: bolder;
+	margin-bottom: 10px !important;
+}
+.banner h3{
+	font-size: 24px;
+	margin: 0 !important;
+}
 
 /*BLOG---------------------------------*/
 .blog{
@@ -57,6 +154,9 @@ img{
 	border-bottom: 1px solid #DDD;
 	padding: 25px 0;
 }
+.blog .blogContent .blogList .blogListPost h2{
+	font-weight: bold;
+}
 .blog .blogContent .blogList .blogListPost .featuredImage{
 	width: 100%;
 	height: 200px;
@@ -65,15 +165,31 @@ img{
 	-ms-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-	border: 1px solid #DDD;
+    background-position: center;
+	border: 2px solid #2383A0;
 }
+.blog .blogContent .blogList .blogListPost .featuredImage:hover{
+	border: 2px solid #50C8F1;
+}
+
 .blog .blogContent .blogPost{
 /*blog post container*/
 	margin: 0 25px;
 	padding: 25px 0;
 }
+.blog .blogContent .blogPost .featuredImage{
+	width: 100%;
+	height: 400px;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-ms-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    background-position: center;
+    margin-bottom: 10px;
+}
 .blog .blogContent .blogPost h1{
-	color: #2383A0 !important;
+	font-weight: bold;
 }
 
 .blog .blogSidebar{
@@ -91,6 +207,22 @@ img{
 .blog .blogSidebar .module:last-child{
 	border-bottom: 0 !important;
 }
+/*search*/
+.blog .blogSidebar .search{
+}
+.blog .blogSidebar .search #fromList{
+	margin-bottom: 0 !important;
+}
+.blog .blogSidebar .search ul li{
+	border-bottom: 1px solid #eee;
+	padding: 10px 0;
+}
+.blog .blogSidebar .search ul li a{
+	display: block;
+}
+/*subscribe*/
+.blog .blogSidebar .subscribe{
+}
 /*popular post*/
 .blog .blogSidebar .popularPost ul li{
 	padding: 10px 0;
@@ -103,9 +235,6 @@ img{
 	display: block;
 	text-decoration: none;
 }
-/*.blog .blogSidebar .popularPost ul li a:hover{
-	text-decoration: none;
-}*/
 /*latest post*/
 .blog .blogSidebar .latestPost ul li{
 	padding: 10px 0;
@@ -118,72 +247,111 @@ img{
 	display: block;
 	text-decoration: none;
 }
-/*.blog .blogSidebar .latestPost ul li a:hover{
-	text-decoration: none;
-}*/
 /*topics*/
 .blog .blogSidebar .topics ul li{
-	padding: 10px 0;
-	border-bottom: 1px solid #eee;
+	padding: 6px 0;
 }
-.blog .blogSidebar .topics ul li:last-child{
-	border-bottom: 0 !important;
+
+/*blog pagination*/
+.blogPagination{
 }
-.blog .blogSidebar .topics ul li a{
-	display: block;
-	text-decoration: none;
+.blogPagination a{
+	color: #2383A0 !important;
 }
-/*.blog .blogSidebar .topics ul li a:hover{
-	text-decoration: none;
-}*/
+.blogPagination a:hover{
+		color: #50C8F1 !important;
+}
+
 
 /*blog comment*/
 .blog .blogContent .new-comments .field{
 	margin-bottom: 15px;
 }
+/*first name*/
 .blog .blogContent .new-comments #firstname-199aa2d3-8044-4149-b478-19d00350334c{
 	width: 100%;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	padding: 6px 12px;
 }
+/*first name error text*/
 #hsForm_199aa2d3-8044-4149-b478-19d00350334c > div.hs_firstname.field.hs-form-field > ul > li > label{
 	color: #FF7676;
 }
+/*last name*/
 .blog .blogContent .new-comments #lastname-199aa2d3-8044-4149-b478-19d00350334c{
 	width: 100%;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	padding: 6px 12px;
 }
+/*email*/
 .blog .blogContent .new-comments #email-199aa2d3-8044-4149-b478-19d00350334c{
 	width: 100%;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	padding: 6px 12px;
 }
+/*email error text*/
 #hsForm_199aa2d3-8044-4149-b478-19d00350334c > div.hs_email.field.hs-form-field > ul > li > label{
 	color: #FF7676;
 }
+/*website*/
 .blog .blogContent .new-comments #website-199aa2d3-8044-4149-b478-19d00350334c{
 	width: 100%;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	padding: 6px 12px;
 }
+/*comment*/
 .blog .blogContent .new-comments #comment-199aa2d3-8044-4149-b478-19d00350334c{
 	width: 100%;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	padding: 6px 12px;
 }
+/*comment error text*/
 #hsForm_199aa2d3-8044-4149-b478-19d00350334c > div.hs_comment.field.hs-form-field > ul > li > label{
 	color: #FF7676;
 }
+/*error text*/
 .blog .blogContent .new-comments ul{
 	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+/*submit button*/
+.blog .blogContent .new-comments .hs-button{
+	width: 100%;
+	border-radius: 5px;
+	border: none;
+	padding: 6px 12px;
+	color: #FFF;
+	background: #31BBED;
+}
+.blog .blogContent .new-comments .hs-button:hover{
+	background: #2383A0;
+}
+
+/*BLOG---------------------------------*/
+.footer{
+	background: #222;
+	padding: 50px 0;
+}
+.footer ul li{
+	padding: 6px 0;
+}
+.footer ul li a:hover{
+	color: #50C8F1;
+}
+.footer .social-links{
+	margin-bottom: 10px;
+}
+.footer .social-links img{
+	width: 34px;
+	height: 34px;
+	float: right;
+	margin: 0 6px;
 }
 
 /*MEDIA QUERIES---------------------------------*/

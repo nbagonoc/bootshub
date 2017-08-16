@@ -1,5 +1,12 @@
 {% include "custom/system/NickCustom/aHeader.html" %}
 
+<div class="banner">
+	<div class="container">
+		<strong><h1 class="text-center text-uppercase color-light">software</h1></strong>
+		<strong><h2 class="text-center text-uppercase color-blue">outsourcing</h2></strong>
+		<strong><h3 class="text-center text-uppercase color-light">resource and information</h3></strong>
+	</div>
+</div>
 <div class="blog">
   <div class="container">
   	<div class="row">
@@ -11,8 +18,9 @@
 						<div class="blogListPost">
 							<div class="row">
 								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-									<div class="featuredImage" style="background-image: url('{{ content.post_list_summary_featured_image }}')">
-									</div>
+									<a href="{{ content.absolute_url }}">
+										<div class="featuredImage" style="background-image: url('{{ content.post_list_summary_featured_image }}')"></div><!-- featured image -->
+									</a>
 								</div>
 								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 									<strong><h2><a href="{{ content.absolute_url }}">{{ content.name }}</a></h2></strong><!-- title -->
@@ -21,8 +29,7 @@
 			                                {{ content.publish_date_local_time.strftime('%B') }}
 			                                {{ content.publish_date_local_time.strftime('%d') }},
 			                                {{ content.publish_date_local_time.strftime('%Y') }}<!-- end date -->
-			                            {##} by <a href="{{ blog_author_url(group.id, content.blog_post_author.slug) }}" class="textMuted">
-			                            {{ content.blog_post_author.display_name }}</a> in<!-- author -->
+			                            {##} by {{ content.blog_post_author.display_name }} in<!-- author -->
 			                            {% if content.topic_list %}
 			                                {% for topic in content.topic_list %}
 			                                    <a class="topic-link" href="{{ group.absolute_url }}/topic/{{ topic.slug }}" class="textMuted">{{ topic.name }}</a><!-- topic -->
@@ -36,36 +43,72 @@
 							</div>
 						</div>
 					{% endfor %}
-						<div class="blogPagination">
-							<ul class="pagination">
-							{% if last_page_num %}
-								<li class="page-item"><a class="page-link" href="{{contact.blog_page_link(last_page_num)}}">Previous</a>
-							{% endif %}
-							{% if next_page_num %}
-								<li class="page-item"><a class="page-link" href="{{contact.blog_page_link(next_page_num)}}">Next</a>
-							{% endif %}
-							</ul>
+						<div class="blogPagination text-center">
+		                    {% set page_list = [-2, -1, 0, 1, 2] %}
+		                    {% if contents.total_page_count - current_page_num == 1 %}{% set offset = -1 %}
+		                    {% elif contents.total_page_count - current_page_num == 0 %}{% set offset = -2 %}
+		                    {% elif current_page_num == 2 %}{% set offset = 1 %}
+		                    {% elif current_page_num == 1 %}{% set offset = 2 %}
+		                    {% else %}{% set offset = 0 %}{% endif %}
+		                    <ul class="pagination">
+		                        {% if last_page_num %}
+		                        	<li><a class="prev-link" href="{{ blog_page_link(last_page_num) }}">< Prev</a></li>
+		                        {% endif %}
+		                        {% if contents.total_page_count > 5 %}
+		                            {% if current_page_num >= 4 %}
+		                                <li><a href="{{ blog_page_link(1) }}">1</a></li>
+		                                <li><a class="elipses" href="{% if current_page_num <= 5 %}{{ blog_page_link(1) }}{% else %}{{ blog_page_link(current_page_num - 5) }}{% endif %}">...</a></li>
+		                            {% endif %}
+		                        {% endif %}
+		                        {% for page in page_list %}
+		                            {% set this_page = current_page_num + page + offset %}
+		                            {% if this_page > 0 and this_page <= contents.total_page_count %}
+		                                <li><a {% if this_page == current_page_num %}class="active"{% endif %} href="{{ blog_page_link(this_page) }}">{{ this_page }}</a></li>
+		                            {% endif %}
+		                        {% endfor %}
+		                        {% if contents.total_page_count > 5 %}
+		                            {% if contents.total_page_count - current_page_num > 2 %}
+		                                <li><a href="{{ blog_page_link(contents.total_page_count) }}">{{ contents.total_page_count }}</a></li>
+		                            {% endif %}
+		                        {% endif %}
+		                        {% if next_page_num %}
+		                        	<li><a class="next-link" href="{{ blog_page_link(current_page_num + 1) }}">Next ></a></li>
+	                        	{% endif %}
+		                    </ul>
 						</div>
 					</div><!-- end blog list view-->
 					{% else %}
 					<div class="blogPost"><!-- blog post view-->
 						<strong><h1>{{ content.name }}</h1></strong>
 						<p class="text-muted">Published on {{ content.publish_date_localized }} by <span class="author">{% if content.blog_post_author %}<span class="author">{{ content.blog_post_author.full_name }}{% endif %}</span> in {% for topic in content.topic_list %} <a class="topic-name" href="{{ content_group.absolute_url }}/topic/{{ topic.name }}">{{topic.name }}</a></span>{% endfor %}</p>
+						<div class="featuredImage" style="background-image: url('{{ content.post_list_summary_featured_image }}')"></div><!-- featured image -->
             			{{ content.post_body }}
 						{% blog_comments "post_comments" %}
-					</div><!-- blog post view-->
+					</div><!-- end blog post view-->
 					{% endif %} <!-- end the listing page versus post page if/else statement -->
 			</div><!-- end blogContent -->
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 			<div class="blogSidebar"><!-- blog sidebar -->
 				<div class="module search"><!-- search -->
-					<strong><h3>Search anything</h3></strong>
-					<input class="form-control" placeholder="search..."/>
+					<strong><h3>Blog article search</h3></strong>
+				      <input class="searchInput form-control" placeholder="search..." type="text" onkeyup="filter(this)"/>
+					<ul id="fromList" class="list-unstyled">
+				    <!-- display all post topics -->
+				    	{% set my_topics = blog_topics('default', 250) %}
+						{% for item in my_topics %}
+							<li class="hidden"><a href="{{ blog_tag_url(group.id, item.slug) }}">{{ item }}</a></li>
+						{% endfor %}
+					<!-- display all post title -->
+						{% set posts = blog_recent_posts('default', 500) %}
+						{% for post in posts %}
+							<li class="hidden"><a href="{{ post.absolute_url }}">{{ post.name }}</a></li>
+						{% endfor %}
+					</ul>
 				</div><!-- end search -->
 				<div class="module subscribe"><!-- subscribe -->
 					<strong><h3>Subscribe to us</h3></strong>
-					<input class="form-control" placeholder="your email..."/>
+					<input class="form-control" placeholder="your email..." type="email"/>
 				</div><!-- end subscribe -->
 				<div class="module popularPost"><!-- popular post -->
 					<strong><h3>Popular post</h3></strong>
@@ -87,10 +130,10 @@
 				</div><!-- end latest post -->
 				<div class="module topics"><!-- topics -->
 					<strong><h3>Topics</h3></strong>
-					<ul class="list-unstyled">
+					<ul class="list-inline">
                     	{% set topics = blog_topics('default', 250) %}
                 		{% for topic in topics %}
-                			<li><a href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic }}</a></li>
+                			<li><a href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic }}</a><span>,</span></li>
                 		{% endfor %}
 					</ul>
 				</div><!-- end topics -->
