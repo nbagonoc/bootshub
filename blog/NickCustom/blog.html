@@ -94,15 +94,15 @@
 					<strong><h3>Blog article search</h3></strong>
 				      <input class="searchInput form-control" placeholder="search..." type="text" onkeyup="filter(this)"/>
 					<ul id="fromList" class="list-unstyled">
-				    <!-- display all post topics -->
-				    	{% set my_topics = blog_topics('default', 250) %}
-						{% for item in my_topics %}
-							<li class="hidden"><a href="{{ blog_tag_url(group.id, item.slug) }}">{{ item }}</a></li>
-						{% endfor %}
 					<!-- display all post title -->
 						{% set posts = blog_recent_posts('default', 500) %}
 						{% for post in posts %}
 							<li class="hidden"><a href="{{ post.absolute_url }}">{{ post.name }}</a></li>
+						{% endfor %}
+				    <!-- display all post topics -->
+				    	{% set my_topics = blog_topics('default', 250) %}
+						{% for item in my_topics %}
+							<li class="hidden"><a href="{{ blog_tag_url(group.id, item.slug) }}">{{ item }}</a></li>
 						{% endfor %}
 					</ul>
 				</div><!-- end search -->

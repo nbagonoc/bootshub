@@ -19,8 +19,6 @@ function filter(element) {
   });
 }
 
-$('ul.nav li.dropdown').hover(function() {
-  $(this).find('.dropdown-menu').stop(true, true).delay(00).fadeIn(250);
-}, function() {
-  $(this).find('.dropdown-menu').stop(true, true).delay(00).fadeOut(250);
+$('.dropdown').on('mouseenter mouseleave click tap', function() {
+  $(this).toggleClass("open");
 });
